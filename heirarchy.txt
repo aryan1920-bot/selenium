@@ -1,0 +1,11 @@
+project_directory/
+|-- tests/
+|   |-- test_eazydiner.py
+|-- pages/
+|   |-- __init__.py
+|   |-- base_page.py
+|   |-- login_page.py
+|   |-- search_page.py
+|   |-- booking_page.py
+|-- eazydiner_tester.py
+|-- requirements.txt
