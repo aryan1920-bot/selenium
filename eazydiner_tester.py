@@ -7,11 +7,12 @@ import time
 
 # Defining the EazyDinerTester class
 class EazyDinerTester:
-    def __init__(self):
-        self.driver = None
-        self.login_page = None
-        self.search_page = None
-        self.booking_page = None
+    def __init__(self, driver=None, base_url='https://www.eazydiner.com/'):
+        self.driver = driver
+        self.base_url = base_url
+        self.login_page = LoginPage(self.driver)
+        self.search_page = SearchPage(self.driver)
+        self.booking_page = BookingPage(self.driver)
 
     def setup(self):
         # Setting up the WebDriver
