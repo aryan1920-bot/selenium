@@ -12,7 +12,7 @@ class LoginPageLocators(BasePageLocators):
     @staticmethod
     def get_otp_input_locator(index):
         return (By.CSS_SELECTOR, f'div.flex.align-v-center input.full-width.float_input.otp_inputs[name="otp{index}"]')
-    
+    E_msg=(By.XPATH,'//*[@id="__next"]/div[2]/div[1]/div[3]/div/div/div[3]/div')
 class SearchPageLocators(BasePageLocators):
     SEARCH_BUTTON = (By.XPATH, '/html/body/div[7]/div[2]/div[2]/div/div[2]/div/form/div[4]/button[2]')
 

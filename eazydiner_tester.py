@@ -1,36 +1,31 @@
-# Importing necessary modules
 from selenium import webdriver
 from pages.login_page import LoginPage
 from pages.search_page import SearchPage
+from pages.base_page import BasePage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from pages.booking_page import BookingPage
 import time
+from utils.locators import *
 
-# Defining the EazyDinerTester class
 class EazyDinerTester:
-    def __init__(self, driver=None, base_url='https://www.eazydiner.com/'):
-        self.driver = driver
+    def __init__(self, driver=None, base_url='https://new-react-test.easydiner.com/'):
+        self.driver = driver or webdriver.Chrome()
         self.base_url = base_url
         self.login_page = LoginPage(self.driver)
         self.search_page = SearchPage(self.driver)
         self.booking_page = BookingPage(self.driver)
 
     def setup(self):
-        # Setting up the WebDriver
-        self.driver = webdriver.Chrome()
+        # Maximize the window during setup if needed
         self.driver.maximize_window()
 
-        # Initializing page objects with the WebDriver instance
-        self.login_page = LoginPage(self.driver)
-        self.search_page = SearchPage(self.driver)
-        self.booking_page = BookingPage(self.driver)
-
     def teardown(self):
-        # Cleaning up and quitting the WebDriver
         if self.driver:
             self.driver.quit()
 
-    def login(self, mobile_number='8307284752'):
-        # Method to simulate the login process
+    def login(self, mobile_number,otp):
         self.login_page.open_website()
         print("Website opened.")
 
@@ -43,13 +38,23 @@ class EazyDinerTester:
         self.login_page.click_get_otp_button()
         print("Clicked on get-otp.")
 
-        self.login_page.enter_otp()
+        self.login_page.enter_otp(otp)
         print("Entered OTP.")
         time.sleep(4)
-        return True
+
+        try:
+            # Check if the element specified by E_msg is visible
+            WebDriverWait(self.driver, 10).until_not(
+                EC.visibility_of_element_located(LoginPageLocators.E_msg)
+            )
+            print("login successful.")
+            return True
+        except TimeoutException:
+            print("login unsuccessful.")
+            return False
+
 
     def booking(self, restaurant_name='test'):
-        # Method to simulate the booking process
         self.search_page.enter_search_query(restaurant_name)
         print("Entered restaurant name.")
 

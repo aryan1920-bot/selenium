@@ -9,7 +9,7 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def perform_action(self, locator, sleep=0, action='click', value=None, maxtries=2, noloop=False):
+    def perform_action(self, locator, sleep=0, action='click', value=None, maxtries=1, noloop=False):
         try_count = 0
         while try_count < maxtries:
             try:

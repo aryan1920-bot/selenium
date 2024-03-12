@@ -40,5 +40,4 @@ class LoginPage(BasePage):
 
         print("Entered otp")  
         time.sleep(3)  
-        # search_locator = (By.XPATH, '<path d="m17 17 4 4M3 11a8 8 0 1 0 16 0 8 8 0 0 0-16 0z" stroke="#FF4612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>')
-        # WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(search_locator))
+        
